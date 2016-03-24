@@ -5,6 +5,12 @@ Discal is a simple web-app which renders a calendar from an ICS URL.
 Set it up on a tablet attached to your meeting room doors,
 and you'll never again have arguments about who booked what and when.
 
+## Try it out
+
+Header over to https://barryvan.github.io/discal/ to give it a 
+shot! Note that, as per the note below, your ICS files will 
+need to be available via CORS.
+
 ## Basic setup
 
 Discal must be served over HTTPS if you want it to be resilient in the face
