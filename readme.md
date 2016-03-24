@@ -5,11 +5,22 @@ Discal is a simple web-app which renders a calendar from an ICS URL.
 Set it up on a tablet attached to your meeting room doors,
 and you'll never again have arguments about who booked what and when.
 
+![Screenshot of Discal](screenshot.png)
+
 ## Try it out
 
 Header over to https://barryvan.github.io/discal/ to give it a 
 shot! Note that, as per the note below, your ICS files will 
 need to be available via CORS.
+
+## Features
+
+* Automatic refresh of calendar data every 60 seconds
+* Configurable scale factor
+* Customisable title
+* Tolerant of network failures (thanks to ServiceWorker)
+* Current time indicator (simple white line)
+* Keeps current time centred in view
 
 ## Basic setup
 
@@ -32,3 +43,9 @@ Discal will make a `fetch()` request for your ICS files.
 This means that they need to be on the same server, or on a server with CORS configured
 to allow such requests. If you're not in this situation, then you may want to consider
 setting up your webserver to proxy requests like `/boardroom.ics` to the appropriate URL.
+
+## Browser support
+
+I've tested this in Firefox 47 and Chrome 51. Because this is a quick hobby project, it
+uses some of the new and shiny, like `fetch`, fat-arrow functions, and `Map` -- so it requires
+browsers which support these to work. (MS Edge is out at the time of writing.) 
