@@ -1,0 +1,169 @@
+html {
+	font-family: 'Titillium Web', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 10pt;
+	background: #172a4f;
+	padding: 0;
+	color: #172a4f;
+}
+
+button, input {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+.config-toggle {
+	position: fixed;
+	top: 0.5em;
+	right: 0.5em;
+	z-index: 2;
+	background: none;
+	border: none;
+	padding: 0;
+	width: 2em;
+	height: 2em;
+	color: #fff;
+	font-weight: bold;
+}
+
+.config-panel {
+	position: fixed;
+	top: 0;
+	right: 0;
+	min-width: 320px;
+	max-width: 100%;
+	background: #fff;
+	padding: 1em;
+	transition: transform 0.5s;
+	z-index: 3;
+	box-shadow: 0 0 8px 8px rgba(0,0,0,0.5);
+	font-size: 125%;
+	text-align: right;
+}
+
+.config-panel.hidden {
+	transform: translateY(-120%);
+}
+
+.config-panel > label {
+	display: flex;
+	padding: 0.25em 0;
+	align-content: center;
+	justify-content: center;
+}
+
+.config-panel > label > span {
+	min-width: 4em;
+	text-align: right;
+	padding: 0 0.5em 0 0;
+	vertical-align: baseline;
+}
+
+.config-panel > label > input {
+	flex: 1;
+	vertical-align: baseline;
+}
+
+.config-panel > button {
+	padding: 0.25em 2em;
+	width: 50%;
+	box-sizing: border-box;
+}
+
+
+main {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+main > h1 {
+	padding: 0 1em;
+	margin: 0;
+	font-size: 300%;
+	font-weight: 100;
+	color: #26b1fc;
+}
+
+main > .wrapper {
+	flex: 1;
+	overflow: auto;
+	position: relative;
+}
+
+
+.timesBar {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+}
+
+.timesBar > li {
+	color: #2172ae;
+	border-top: 1px solid currentColor;
+	box-sizing: border-box;
+	padding: 0 0.25em;
+}
+
+.timesBar > li.half {
+	color: #41587f;
+
+}
+
+#root {
+	list-style: none;
+	margin: 0 0.25em 0 3em;
+	padding: 0;
+	position: relative;
+}
+
+#root > li {
+	position: absolute;
+	background: #26b1fc;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 0.5em;
+	margin: 0;
+	color: #fff;
+	overflow: hidden;
+	font-weight: 100;
+	outline: 0.25em solid #172a4f;
+}
+
+#root > li > h2 {
+	padding: 0;
+	margin: 0;
+	font-size: 125%;
+	font-weight: normal;
+	text-shadow: 0 1px 1px rgba(0,0,0,0.25);
+}
+
+#root > li > .attendeesSummary,
+#root > li > .attendees {
+	display: inline;
+}
+
+#root > li > .attendees {
+	opacity: 0.5;
+	margin-left: 1em;
+}
+
+#root > .now {
+	border-top: 1px solid #fff;
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	box-sizing: border-box;
+}

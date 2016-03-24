@@ -1,0 +1,23 @@
+<!doctype html>
+
+<title>Discal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,400italic,200,200italic,700,700italic&amp;subset=latin" rel="stylesheet">
+
+<script>
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/sw.js').then(registration => {
+			console.log('ServiceWorker registered in scope ', registration.scope)
+		}).catch(error => {
+			console.warn('Failed to register ServiceWorker', error);
+		});
+	}
+</script>
+<script src="js/element.js"></script>
+<script src="js/index.js"></script>
+<script src="js/config.js"></script>
+<script src="js/parse.js"></script>
+<script src="js/render.js"></script>
+
+<script src="lib/ical.js"></script>
