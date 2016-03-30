@@ -46,6 +46,21 @@ setting up your webserver to proxy requests like `/boardroom.ics` to the appropr
 
 ## Browser support
 
-I've tested this in Firefox 47 and Chrome 51. Because this is a quick hobby project, it
-uses some of the new and shiny, like `fetch`, fat-arrow functions, and `Map` -- so it requires
-browsers which support these to work. (MS Edge is out at the time of writing.) 
+* Firefox (tested in 47)
+* Chrome (tested in 51)
+* Edge (tested in 25; uses a polyfill for `fetch`)
+
+Because this is a quick hobby project, it uses some of the new and shiny, like
+[the `fetch` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API),
+[fat-arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions),
+and [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map)
+-- so it requires
+browsers which support these to work. (MS Edge is out at the time of writing.)
+
+## Libraries
+
+* The excellent [iCal.js](https://github.com/mozilla-comm/ical.js) library by Mozilla to parse
+and work with `ics` files and events.
+* [GitHub's Fetch polyfill](https://github.com/github/fetch) lets this work in browsers that don't yet
+support the `fetch()` API.
+

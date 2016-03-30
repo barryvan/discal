@@ -22,10 +22,10 @@ window.addEventListener('load', () => {
 	};
 	
 	discal.setup.save = () => {
-		title = titleInput.value || '';
+		title = titleInput.value || 'Discal Demo';
 		localStorage.setItem('title', title);
 		
-		url = urlInput.value || '';
+		url = urlInput.value || 'demo.ics';
 		localStorage.setItem('url', url);
 		
 		scale = scaleInput.value || 1.5;

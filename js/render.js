@@ -91,7 +91,7 @@ window.addEventListener('load', () => {
 		let scale = +(localStorage.getItem('scale') || 1.5); // Number of CSS pixels per minute
 		scale = scale / 60;
 		
-		title.textContent = localStorage.getItem('title') || '';
+		title.textContent = localStorage.getItem('title') || 'Discal demo';
 		
 		root.innerHTML = '';
 		root.style.height = (24 * 60 * 60 * scale) + 'px';
