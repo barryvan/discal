@@ -1,8 +1,6 @@
 window.discal = window.discal || {};
 
 window.addEventListener('load', () => {
-	const minimumLength = 45 * 60; // Draw each entry as at least 45 minutes long
-	
 	const container = element('main');
 	
 	const title = element('h1');
@@ -40,18 +38,18 @@ window.addEventListener('load', () => {
 	let timeToSeconds = time => time.getHours() * 60 * 60 + time.getMinutes() * 60 + time.getSeconds();
 	
 	const findOverlaps = (event, column, haystack, assignments) => {
-		let start = timeToSeconds(event.startDate.toJSDate());
-		let end = timeToSeconds(event.endDate.toJSDate());
-		end = Math.max(end, start + minimumLength);
+		let start = timeToSeconds(event.startDate);
+		let end = timeToSeconds(event.endDate);
+		end = Math.max(end, start + discal.config.minimumLength);
 		
 		return haystack.filter(other => {
 			if (event === other || (column !== undefined && column !== assignments.get(other))) {
 				return false;
 			}
 			
-			let otherStart = timeToSeconds(other.startDate.toJSDate());
-			let otherEnd = timeToSeconds(other.endDate.toJSDate());
-			otherEnd = Math.max(otherEnd, otherStart + minimumLength);
+			let otherStart = timeToSeconds(other.startDate);
+			let otherEnd = timeToSeconds(other.endDate);
+			otherEnd = Math.max(otherEnd, otherStart + discal.config.minimumLength);
 			
 			return !(end <= otherStart || start >= otherEnd);
 		});
@@ -107,17 +105,17 @@ window.addEventListener('load', () => {
 		// use event.location to get the free-form text of the location
 		// use event.organizer to get the mailto: address of the organiser
 		// use event.attendees[n].jCal[1].partstat to get the status of the attendee -- "ACCEPTED" or "DECLINED" or "NEEDS-ACTION"
-		// use event.startDate.toJSDate() and event.endDate.toJSDate()
+		// use event.startDate and event.endDate
 		
 		events = events.sort((a, b) => {
-			return (a.startDate.toJSDate() - b.startDate.toJSDate()) || (a.endDate.toJSDate() - b.endDate.toJSDate());
+			return (a.startDate - b.startDate) || (a.endDate - b.endDate);
 		});
 		
 		const decorate = (event, el) => {
 			let stripMailto = (text) => text ? (text.startsWith('mailto:') ? text.substring(7) : text) : '';
 			
-			let start = event.startDate.toJSDate();
-			let end = event.endDate.toJSDate();
+			let start = event.startDate;
+			let end = event.endDate;
 			
 			let attending = event.attendees.filter(attendee => attendee.jCal[1].partStat !== 'DECLINED');
 			
@@ -147,14 +145,20 @@ window.addEventListener('load', () => {
 				'textContent': attending.map(attendee => stripMailto(attendee.jCal[3])).filter(item => !!item).join(', ')
 			});
 			
-			drawTimes(scale);
+			if (discal.config.highlightCurrent) {
+				let now = timeToSeconds(new Date());
+				if (timeToSeconds(event.startDate) <= now && timeToSeconds(event.endDate) >= now) {
+					el.classList.add('current');
+				}
+			}
+			
 			element.appendAll(el, title, organiser, times, location, attendeesSummary, attendees);
 		};
 		
 		const rendered = events.map(event => {
-			let start = timeToSeconds(event.startDate.toJSDate());
-			let end = timeToSeconds(event.endDate.toJSDate());
-			end = Math.max(end, start + minimumLength);
+			let start = timeToSeconds(event.startDate);
+			let end = timeToSeconds(event.endDate);
+			end = Math.max(end, start + discal.config.minimumLength);
 			
 			var opts = { style: {} };
 			opts.style[beginEdge] = start * scale;
@@ -175,7 +179,7 @@ window.addEventListener('load', () => {
 		});
 		nowIndicator.style[beginEdge] = (now * scale) + 'px';
 		
-		
+		drawTimes(scale);
 		element.appendAll(root, nowIndicator, ...rendered);
 		wrapper.scrollTop = now * scale - wrapper.offsetHeight / 2;
 	};

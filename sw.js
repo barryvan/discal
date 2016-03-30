@@ -5,7 +5,7 @@
 // Note that the JS for this worker must be in the root
 // of the site, as it operates in this scope.
 
-const cacheName = 'v2::static';
+const cacheName = 'v3::static';
 
 self.addEventListener('install', event => {
 	event.waitUntil(
@@ -16,7 +16,7 @@ self.addEventListener('install', event => {
 				
 				'/css/style.css',
 				
-				'/js/config.js',
+				'/js/setup.js',
 				'/js/element.js',
 				'/js/index.js',
 				'/js/parse.js',

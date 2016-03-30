@@ -16,7 +16,7 @@ body {
 	margin: 0;
 }
 
-.config-toggle {
+.setup-toggle {
 	position: fixed;
 	top: 0.5em;
 	right: 0.5em;
@@ -30,7 +30,7 @@ body {
 	font-weight: bold;
 }
 
-.config-panel {
+.setup-panel {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -45,30 +45,30 @@ body {
 	text-align: right;
 }
 
-.config-panel.hidden {
+.setup-panel.hidden {
 	transform: translateY(-120%);
 }
 
-.config-panel > label {
+.setup-panel > label {
 	display: flex;
 	padding: 0.25em 0;
 	align-content: center;
 	justify-content: center;
 }
 
-.config-panel > label > span {
+.setup-panel > label > span {
 	min-width: 4em;
 	text-align: right;
 	padding: 0 0.5em 0 0;
 	vertical-align: baseline;
 }
 
-.config-panel > label > input {
+.setup-panel > label > input {
 	flex: 1;
 	vertical-align: baseline;
 }
 
-.config-panel > button {
+.setup-panel > button {
 	padding: 0.25em 2em;
 	width: 50%;
 	box-sizing: border-box;
@@ -142,6 +142,11 @@ main > .wrapper {
 	outline: 0.25em solid #172a4f;
 }
 
+#root > li.current {
+	outline-color: #fff;
+	z-index: 1; /* Stack above events which overlap */
+}
+
 #root > li > h2 {
 	padding: 0;
 	margin: 0;
@@ -163,7 +168,7 @@ main > .wrapper {
 #root > .now {
 	border-top: 1px solid #fff;
 	position: absolute;
-	z-index: 1;
+	z-index: 2; /* Above all events */
 	width: 100%;
 	box-sizing: border-box;
 }
