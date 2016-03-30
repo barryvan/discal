@@ -6,6 +6,32 @@ window.addEventListener('load', () => {
 	let scale = +(localStorage.getItem('scale') || '1.5');
 	let title = localStorage.getItem('title') || 'Discal Demo';
 	
+	// Straight from https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
+	discal.setup.fullscreen = () => {
+		if (!document.fullscreenElement &&    // alternative standard method
+      !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+			if (document.documentElement.requestFullscreen) {
+				document.documentElement.requestFullscreen();
+			} else if (document.documentElement.msRequestFullscreen) {
+				document.documentElement.msRequestFullscreen();
+			} else if (document.documentElement.mozRequestFullScreen) {
+				document.documentElement.mozRequestFullScreen();
+			} else if (document.documentElement.webkitRequestFullscreen) {
+				document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+			}
+		} else {
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else if (document.msExitFullscreen) {
+				document.msExitFullscreen();
+			} else if (document.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			} else if (document.webkitExitFullscreen) {
+				document.webkitExitFullscreen();
+			}
+		}
+	};
+	
 	discal.setup.show = () => {
 		setupPanel.classList.remove('hidden');
 	};
@@ -40,6 +66,13 @@ window.addEventListener('load', () => {
 		'innerHTML': '&#8801;',
 		'events': {
 			'click': discal.setup.show
+		}
+	});
+	let fullscreenToggle = element('button', {
+		'className': 'fullscreen-toggle',
+		'innerHTML': '[+]',
+		'events': {
+			'click': discal.setup.fullscreen
 		}
 	});
 	
@@ -90,7 +123,7 @@ window.addEventListener('load', () => {
 		}
 	});
 	element.appendAll(setupPanel, titleLabel, urlLabel, scaleLabel, okButton, cancelButton);
-	element.appendAll(document.body, setupToggle, setupPanel);
+	element.appendAll(document.body, fullscreenToggle, setupToggle, setupPanel);
 	
 	if (!url) discal.setup.show();
 });
